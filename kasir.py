@@ -1,22 +1,42 @@
-def p(x, y):
-    a = 0
-    for i in range(len(x)):
-        if x[i] == "mie":
-            a = a + 10000 * y[i]
-        elif x[i] == "es":
-            a = a + 5000 * y[i]
-        elif x[i] == "nasi":
-            a = a + 12000 * y[i]
-        else:
-            a = a + 0
+def hitung_total(harga_barang, daftar_belanja):
+    total = 0
 
-    if a > 50000:
-        a = a - (a * 0.1)
+    for item, jumlah in daftar_belanja.items():
+        if item in harga_barang:
+            total += harga_barang[item] * jumlah
 
-    print("Total:", a)
+    return total
 
 
-barang = ["mie", "es", "nasi"]
-jumlah = [2, 3, 1]
+def hitung_diskon(total):
+    if total > 50000:
+        return total * 0.1
+    return 0
 
-p(barang, jumlah)
+
+def tampilkan_total(total):
+    print(f"Total yang harus dibayar: {total}")
+
+
+def main():
+    harga_barang = {
+        "mie": 10000,
+        "es": 5000,
+        "nasi": 12000
+    }
+
+    daftar_belanja = {
+        "mie": 2,
+        "es": 3,
+        "nasi": 1
+    }
+
+    total = hitung_total(harga_barang, daftar_belanja)
+    diskon = hitung_diskon(total)
+    total_akhir = total - diskon
+
+    tampilkan_total(total_akhir)
+
+
+if __name__ == "__main__":
+    main()
